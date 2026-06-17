@@ -222,38 +222,106 @@ Possible reporting layers:
 
 The final goal is to create a repeatable Power Automate Desktop workflow that can read inventory data, validate it, create or update Atlassian Assets objects, create or update Jira issues, link them together, and write results back to the source file.
 
-### Suggested Weekly Roadmap
+### Task List
 
-Week 1:
+Task 1:
   Confirm source columns.
   Create 5-row mock dataset.
   Confirm PowerShell can read the file.
 
-Week 2:
+Task 2:
   Pull object types from Assets.
   Pull attributes for each object type.
   Save ObjectTypeIDs and AttributeIDs.
 
-Week 3:
+Task 3:
   Build ObjectTypeMapping.csv.
   Build AttributeMapping.csv.
   Validate required fields.
 
-Week 4:
+Task 4:
   Build Assets JSON payload from one row.
   Create one object in Assets.
   Write AssetObjectID back to source.
 
-Week 5:
+Task 5:
   Add search-before-create logic.
   Update existing objects instead of duplicating.
 
-Week 6:
+Task 6:
   Add Jira issue creation.
   Save JiraIssueKey back to source.
 
-Week 7:
+Task 7:
   Link Jira issue and Assets object.
 
-Week 8:
+Task 8:
   Add logging, error handling, and documentation.
+
+### Pending Implementation
+
+#### Task 3 (In progress JC)
+
+After obtaining the pre-mapping file, the "flattened" file, we need to create a mapping file that will essentially tell the mock data all the information needed to know where to place it in assets. This will possibly be two files, or one with two sheets. The source file (source of truth, in this case the `MockAssets.csv`) will need to be in a structure that mostly agrees with the information inside `issue_details.md`. We also need to ensure that the required information is at the minimum being filled in
+
+#### Task 4
+
+Prove that one source row can successfully become one Atlassian Assets object.
+
+First, take one valid row from the source file and use its TargetObjectTypeID to decide what type of Assets object should be created. Then use the attribute mapping file to match each source column to the correct Assets attribute ID.
+
+After the row values are matched to the correct Assets attributes, build the JSON payload required by the Assets API. This payload should include the object type ID and the list of attributes with their values.
+
+Once the payload is built, send it to the Assets create-object API endpoint. If the request succeeds, Atlassian Assets will return the newly created object information, including the AssetObjectID.
+
+Finally, write the returned AssetObjectID back into the original source row. Also update the row’s sync fields, such as setting SyncStatus to Success, updating LastSyncDate, and clearing ErrorMessage.
+
+In the end, the workflow should be able to create one Assets object from one source row and record the result back in the source file.
+
+#### Task 5
+
+The goal is to prevent duplicate Assets objects from being created.
+
+Before creating a new object, the workflow should search Atlassian Assets to check whether the asset already exists. The search can be based on a unique field such as SourceRecordID, SerialNumber, or another reliable identifier.
+
+If a matching object is found, the workflow should update the existing Assets object instead of creating a new one. If no match is found, the workflow should continue with the create-object process from Task 4.
+
+This task adds the decision logic needed to choose between creating a new object and updating an existing one.
+
+In the end, the workflow should be able to process one row without creating duplicates.
+
+#### Task 6
+
+The goal is to add Jira issue creation after the Assets object has been created or updated.
+
+Once the Assets step succeeds, the workflow should use the source row and asset result to build a Jira issue payload. This should include the required Jira fields, such as project key, issue type, summary, and description.
+
+If the source row does not already have a JiraIssueKey, the workflow should create a new Jira issue. After the issue is created, Jira will return the issue key and internal issue ID.
+
+The workflow should then write the JiraIssueKey and JiraIssueID back into the source row.
+
+In the end, one source row should be able to create or update an Assets object and then create a related Jira issue.
+
+#### Task 7
+
+The goal is to connect the Jira issue and the Assets object together.
+
+After both the Assets object and Jira issue exist, the workflow should create a link between them. This can be done by writing the AssetObjectID into a Jira Assets custom field and/or writing the JiraIssueKey into an Assets attribute.
+
+This step makes the relationship visible from both sides. The Jira issue should show which asset it belongs to, and the Assets object should show which Jira issue is connected to it.
+
+The workflow should also confirm that both IDs were saved correctly before marking the row as fully successful.
+
+In the end, the system should create a complete connection between the source row, the Assets object, and the Jira issue.
+
+#### Task 8
+
+The goal is to improve reliability, logging, and documentation.
+
+The workflow should handle common errors, such as missing required fields, failed API calls, invalid mappings, or duplicate matches. When an error happens, the workflow should write a clear message into ErrorMessage and set SyncStatus to Error.
+
+Logging should also be added so that each major step can be reviewed later. This includes when the script starts, which row is being processed, what API action was attempted, whether it succeeded or failed, and where any error occurred.
+
+The documentation should be updated to explain how the workflow works, what files are required, what columns are expected, and how to troubleshoot common problems.
+
+In the end, the workflow should be easier to test, debug, and hand off to someone else.

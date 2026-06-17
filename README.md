@@ -10,7 +10,7 @@ The next step after figuring out the assets project is to then make it so that w
 
 I have made this repo to share with other interns in an effort to tackle this together. When making a pull request the goal is to be very detailed like I have been in this README.md in order to successfully run the scripts locally to see how the process works, and make meaningful contributions. The path that everyone should have as a baseline is, `Z:\01 Intern Work\Current Interns\YOUR_NAME\project`. You can consider this as a way of having the project locally for your changes and testing.
 
-Inside `notes` there is additional information regarding the structure of this project.
+Inside `notes` there is additional information regarding the structure of this project. Pending implementations for future PR's can be found inside `notes\flowchart.md` at the bottom of the file.
 
 ## Create mock data
 

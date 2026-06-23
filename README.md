@@ -45,11 +45,3 @@ In a new flow you will need to create two additional variables, `folder_path` an
 The final excel holding all the data is called `assets_schema_5_flattened.xlsx`. The is and additional `assets_flatten_debug.log` file that is created to help with debugging in case there are issues in creating the excel file.
 
 This script is all contained in one file and was ran on Power Automate inside one flow using one action. This can be found under `script\json_to_flattened.ps1`.
-
-# SUMMARY OF LAST SESSION 06/17
-
-Today I finished debugging the `json_to_flattened` file and have successfully created the excel that will help construct the actual mapping file.
-
-Next step is to finish task 3 which is the implementation of the mapping file that will help tell future scripts where the each source of truth points to in assets. Last left of in the main file in chatgippity.
-
-Additionally this repo was created to help catch others up to speed with the current progress of the project. The goal is to read this md file and have an intuitive idea of the structure and easily be able to replicate the project.

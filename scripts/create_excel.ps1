@@ -1,959 +1,147 @@
-# The purpose of this file is to create some mock data that we will then use to test the functionality of our inventory tracking system. Any changes to this file should reflect in Assets.
+$path = "Z:\01 Intern Work\Current Interns\Jorge C\project\MockAssets.csv"
 
-$path = "Z:\01 Intern Work\Current Interns\YOUR_NAME\project\MockAssets.csv"
+function New-MockAssetRow {
+    param (
+        [string]$SourceRecordID,
+        [string]$ItemName,
+        [string]$Category,
+        [string]$Color = "",
+        [string]$Model = "",
+        [string]$SerialNumber,
+        [string]$Location,
+        [string]$Status = "Available",
+        [string]$Owner = "",
+        [string]$Notes = "",
+        [string]$CreateJiraItem = "No",
+        [string]$CreateAssetObject = "Yes"
+    )
+
+    [PSCustomObject][ordered]@{
+        SourceRecordID    = $SourceRecordID
+        ItemName          = $ItemName
+        Category          = $Category
+        Color             = $Color
+        Model             = $Model
+        SerialNumber      = $SerialNumber
+        Location          = $Location
+        Status            = $Status
+        Owner             = $Owner
+        Notes             = $Notes
+        CreateJiraItem    = $CreateJiraItem
+        CreateAssetObject = $CreateAssetObject
+        JiraIssueKey      = ""
+        JiraIssueID       = ""
+        AssetObjectID     = ""
+        LastSyncDate      = ""
+        SyncStatus        = "Pending"
+        ErrorMessage      = ""
+    }
+}
 
 $rows = @(
-    [PSCustomObject]@{
-        ItemName='Nitrile Gloves'
-        Category='Product'
-        Color=''
-        Model='Box of 100'
-        SerialNumber='PROD-001'
-        Location='OC HCA Main Distribution Center (Santa Ana) - Aisle A, Shelf 1'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; Box of 100'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='N95 Respirator Masks'
-        Category='Product'
-        Color=''
-        Model=''
-        SerialNumber='PROD-002'
-        Location='North Field Station (Anaheim) - Aisle B, Shelf 2'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Surgical Gowns'
-        Category='Product'
-        Color=''
-        Model=''
-        SerialNumber='PROD-003'
-        Location='South Field Station (Irvine) - Aisle C, Shelf 3'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Sterile Gauze Pads'
-        Category='Product'
-        Color=''
-        Model=''
-        SerialNumber='PROD-004'
-        Location='Mobile Command Unit Storage (Orange) - Cold Storage Unit 1'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Saline IV Bags'
-        Category='Product'
-        Color=''
-        Model='1L'
-        SerialNumber='PROD-005'
-        Location='East Field Station (Tustin) - Hazmat Cage'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; 1L'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Bottled Water'
-        Category='Product'
-        Color=''
-        Model='Case of 24'
-        SerialNumber='PROD-006'
-        Location='Coastal Staging Area (Dana Point) - Vehicle Bay'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; Case of 24'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='MRE Meals'
-        Category='Product'
-        Color=''
-        Model='Case of 12'
-        SerialNumber='PROD-007'
-        Location='Central Supply Depot (Garden Grove) - Outdoor Staging Pad'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; Case of 12'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Alcohol Prep Pads'
-        Category='Product'
-        Color=''
-        Model='Box of 200'
-        SerialNumber='PROD-008'
-        Location='OC HCA Main Distribution Center (Santa Ana) - Overflow Container Unit'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; Box of 200'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Disposable Face Shields'
-        Category='Product'
-        Color=''
-        Model='Box of 50'
-        SerialNumber='PROD-009'
-        Location='North Field Station (Anaheim) - Refrigerated Trailer Bay'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; Box of 50'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Elastic Bandages'
-        Category='Product'
-        Color=''
-        Model='4" rolls'
-        SerialNumber='PROD-010'
-        Location='South Field Station (Irvine) - Quarantine Storage Room'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; 4" rolls'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Cervical Collars'
-        Category='Product'
-        Color=''
-        Model='assorted sizes'
-        SerialNumber='PROD-011'
-        Location='Mobile Command Unit Storage (Orange) - Aisle A, Shelf 1'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; assorted sizes'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Triage Tags'
-        Category='Product'
-        Color=''
-        Model='Pack of 50'
-        SerialNumber='PROD-012'
-        Location='East Field Station (Tustin) - Aisle B, Shelf 2'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; Pack of 50'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Biohazard Bags'
-        Category='Product'
-        Color=''
-        Model='Roll of 25'
-        SerialNumber='PROD-013'
-        Location='Coastal Staging Area (Dana Point) - Aisle C, Shelf 3'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; Roll of 25'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Hand Sanitizer'
-        Category='Product'
-        Color=''
-        Model='Gallon jugs'
-        SerialNumber='PROD-014'
-        Location='Central Supply Depot (Garden Grove) - Cold Storage Unit 1'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; Gallon jugs'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Disposable Thermometer Covers'
-        Category='Product'
-        Color=''
-        Model='Box of 500'
-        SerialNumber='PROD-015'
-        Location='OC HCA Main Distribution Center (Santa Ana) - Hazmat Cage'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; Box of 500'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Tongue Depressors'
-        Category='Product'
-        Color=''
-        Model='Box of 100'
-        SerialNumber='PROD-016'
-        Location='North Field Station (Anaheim) - Vehicle Bay'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; Box of 100'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Steri-Strips'
-        Category='Product'
-        Color=''
-        Model='Box of 50'
-        SerialNumber='PROD-017'
-        Location='South Field Station (Irvine) - Outdoor Staging Pad'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample consumable from PDF; Box of 50'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Epinephrine Auto-Injectors'
-        Category='Perishable Product'
-        Color=''
-        Model='exp. 2026'
-        SerialNumber='PER-001'
-        Location='Mobile Command Unit Storage (Orange) - Hazmat Cage'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample perishable from PDF; exp. 2026'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Amoxicillin 500mg'
-        Category='Perishable Product'
-        Color=''
-        Model='exp. 2025'
-        SerialNumber='PER-002'
-        Location='East Field Station (Tustin) - Vehicle Bay'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample perishable from PDF; exp. 2025'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Tetanus Vaccines'
-        Category='Perishable Product'
-        Color=''
-        Model='cold storage, exp. 2025'
-        SerialNumber='PER-003'
-        Location='Coastal Staging Area (Dana Point) - Cold Storage Unit 1'
-        Status='Cold Storage'
-        Owner=''
-        Notes='Sample perishable from PDF; cold storage, exp. 2025'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Insulin Pens'
-        Category='Perishable Product'
-        Color=''
-        Model='cold storage, exp. 2025'
-        SerialNumber='PER-004'
-        Location='Central Supply Depot (Garden Grove) - Cold Storage Unit 1'
-        Status='Cold Storage'
-        Owner=''
-        Notes='Sample perishable from PDF; cold storage, exp. 2025'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Blood Units'
-        Category='Perishable Product'
-        Color=''
-        Model='cold storage, exp. 7 days'
-        SerialNumber='PER-005'
-        Location='OC HCA Main Distribution Center (Santa Ana) - Cold Storage Unit 1'
-        Status='Cold Storage'
-        Owner=''
-        Notes='Sample perishable from PDF; cold storage, exp. 7 days'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Naloxone Nasal Spray'
-        Category='Perishable Product'
-        Color=''
-        Model='exp. 2026'
-        SerialNumber='PER-006'
-        Location='North Field Station (Anaheim) - Quarantine Storage Room'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample perishable from PDF; exp. 2026'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Atropine Injection 1mg'
-        Category='Perishable Product'
-        Color=''
-        Model='exp. 2026'
-        SerialNumber='PER-007'
-        Location='South Field Station (Irvine) - Aisle A, Shelf 1'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample perishable from PDF; exp. 2026'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Glucagon Emergency Kit'
-        Category='Perishable Product'
-        Color=''
-        Model='cold storage, exp. 2025'
-        SerialNumber='PER-008'
-        Location='Mobile Command Unit Storage (Orange) - Cold Storage Unit 1'
-        Status='Cold Storage'
-        Owner=''
-        Notes='Sample perishable from PDF; cold storage, exp. 2025'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Diazepam Rectal Gel'
-        Category='Perishable Product'
-        Color=''
-        Model='exp. 2026'
-        SerialNumber='PER-009'
-        Location='East Field Station (Tustin) - Aisle C, Shelf 3'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample perishable from PDF; exp. 2026'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Packed Red Blood Cells'
-        Category='Perishable Product'
-        Color=''
-        Model='cold storage, exp. 42 days'
-        SerialNumber='PER-010'
-        Location='Coastal Staging Area (Dana Point) - Cold Storage Unit 1'
-        Status='Cold Storage'
-        Owner=''
-        Notes='Sample perishable from PDF; cold storage, exp. 42 days'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Fresh Frozen Plasma'
-        Category='Perishable Product'
-        Color=''
-        Model='frozen, exp. 1 year'
-        SerialNumber='PER-011'
-        Location='Central Supply Depot (Garden Grove) - Cold Storage Unit 1'
-        Status='Cold Storage'
-        Owner=''
-        Notes='Sample perishable from PDF; frozen, exp. 1 year'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Albuterol Inhalers'
-        Category='Perishable Product'
-        Color=''
-        Model='exp. 2026'
-        SerialNumber='PER-012'
-        Location='OC HCA Main Distribution Center (Santa Ana) - Vehicle Bay'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample perishable from PDF; exp. 2026'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Morphine Sulfate 10mg vials'
-        Category='Perishable Product'
-        Color=''
-        Model='exp. 2026'
-        SerialNumber='PER-013'
-        Location='North Field Station (Anaheim) - Outdoor Staging Pad'
-        Status='In Stock'
-        Owner=''
-        Notes='Sample perishable from PDF; exp. 2026'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Philips HeartStart Defibrillator'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-001'
-        Location='South Field Station (Irvine) - Outdoor Staging Pad'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #001'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Portable Oxygen Concentrator'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-002'
-        Location='Mobile Command Unit Storage (Orange) - Overflow Container Unit'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #002'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Zoll Ventilator'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-003'
-        Location='East Field Station (Tustin) - Refrigerated Trailer Bay'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #003'
-        'CreateJiraItem (Yes/No)'='Yes'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Motorola Emergency Radio'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-004'
-        Location='Coastal Staging Area (Dana Point) - Quarantine Storage Room'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #004'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Honda EU2200i Generator'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-005'
-        Location='Central Supply Depot (Garden Grove) - Aisle A, Shelf 1'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #005'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='FLIR Thermal Imaging Camera'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-006'
-        Location='OC HCA Main Distribution Center (Santa Ana) - Aisle B, Shelf 2'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #006'
-        'CreateJiraItem (Yes/No)'='Yes'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Stryker Power-PRO Stretcher'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-007'
-        Location='North Field Station (Anaheim) - Aisle C, Shelf 3'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #007'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='DJI Matrice 300 Drone'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-008'
-        Location='South Field Station (Irvine) - Cold Storage Unit 1'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #008'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Iridium 9575 Satellite Phone'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-009'
-        Location='Mobile Command Unit Storage (Orange) - Hazmat Cage'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #009'
-        'CreateJiraItem (Yes/No)'='Yes'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='MSA SCBA Air Pack'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-010'
-        Location='East Field Station (Tustin) - Vehicle Bay'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #010'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Draeger Gas Detection Unit'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-011'
-        Location='Coastal Staging Area (Dana Point) - Outdoor Staging Pad'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #011'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Pelican Mobile Command Case'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-012'
-        Location='Central Supply Depot (Garden Grove) - Overflow Container Unit'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #012'
-        'CreateJiraItem (Yes/No)'='Yes'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='Yamaha EF3000iSEB Generator'
-        Category='Equipment'
-        Color=''
-        Model=''
-        SerialNumber='AST-013'
-        Location='OC HCA Main Distribution Center (Santa Ana) - Refrigerated Trailer Bay'
-        Status='Available'
-        Owner=''
-        Notes='Tracked equipment from PDF; Asset #013'
-        'CreateJiraItem (Yes/No)'='No'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='2022 Ford E-450 Ambulance'
-        Category='Vehicle'
-        Color=''
-        Model='2022 Ford E-450 Ambulance'
-        SerialNumber='1FDXE4FS'
-        Location='Coastal Staging Area (Dana Point) - Vehicle Bay'
-        Status='Available'
-        Owner=''
-        Notes='Vehicle sample from PDF'
-        'CreateJiraItem (Yes/No)'='Yes'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='2021 Freightliner Mobile Command'
-        Category='Vehicle'
-        Color=''
-        Model='2021 Freightliner Mobile Command'
-        SerialNumber='3ALACYCS'
-        Location='Central Supply Depot (Garden Grove) - Vehicle Bay'
-        Status='Available'
-        Owner=''
-        Notes='Vehicle sample from PDF'
-        'CreateJiraItem (Yes/No)'='Yes'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='2023 Ford Transit Cargo Van'
-        Category='Vehicle'
-        Color=''
-        Model='2023 Ford Transit Cargo Van'
-        SerialNumber='1FTBW9CG'
-        Location='OC HCA Main Distribution Center (Santa Ana) - Vehicle Bay'
-        Status='Available'
-        Owner=''
-        Notes='Vehicle sample from PDF'
-        'CreateJiraItem (Yes/No)'='Yes'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='2023 Polaris Ranger XP UTV'
-        Category='Vehicle'
-        Color=''
-        Model='2023 Polaris Ranger XP UTV'
-        SerialNumber='3NSRMA9'
-        Location='North Field Station (Anaheim) - Vehicle Bay'
-        Status='Available'
-        Owner=''
-        Notes='Vehicle sample from PDF'
-        'CreateJiraItem (Yes/No)'='Yes'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='2022 International MV607 Supply Truck'
-        Category='Vehicle'
-        Color=''
-        Model='2022 International MV607 Supply Truck'
-        SerialNumber='3HAXCAPT'
-        Location='South Field Station (Irvine) - Vehicle Bay'
-        Status='Available'
-        Owner=''
-        Notes='Vehicle sample from PDF'
-        'CreateJiraItem (Yes/No)'='Yes'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='2020 Ford F-350 Crew Cab'
-        Category='Vehicle'
-        Color=''
-        Model='2020 Ford F-350 Crew Cab'
-        SerialNumber='1FT8W3BN'
-        Location='Mobile Command Unit Storage (Orange) - Vehicle Bay'
-        Status='Available'
-        Owner=''
-        Notes='Vehicle sample from PDF'
-        'CreateJiraItem (Yes/No)'='Yes'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
-    [PSCustomObject]@{
-        ItemName='2024 Ram ProMaster 3500'
-        Category='Vehicle'
-        Color=''
-        Model='2024 Ram ProMaster 3500'
-        SerialNumber='3C6MRVJG'
-        Location='East Field Station (Tustin) - Vehicle Bay'
-        Status='Available'
-        Owner=''
-        Notes='Vehicle sample from PDF'
-        'CreateJiraItem (Yes/No)'='Yes'
-        'CreateAssetObject (Yes/No)'='Yes'
-        JiraIssueKey=''
-        JiraIssueID=''
-        AssetObjectID=''
-        LastSyncDate=''
-        SyncStatus='Pending'
-        ErrorMessage=''
-    }
+    New-MockAssetRow `
+        -SourceRecordID "SRC-0001" `
+        -ItemName "Nitrile Gloves" `
+        -Category "Product" `
+        -Model "Box of 100" `
+        -SerialNumber "PROD-001" `
+        -Location "OC HCA Main Distribution Center (Santa Ana) - Aisle A, Shelf 1" `
+        -Status "In Stock" `
+        -Notes "Sample consumable item."
+
+    New-MockAssetRow `
+        -SourceRecordID "SRC-0002" `
+        -ItemName "N95 Respirator Masks" `
+        -Category "Product" `
+        -Model "Box of 50" `
+        -SerialNumber "PROD-002" `
+        -Location "North Field Station (Anaheim) - Aisle B, Shelf 2" `
+        -Status "In Stock" `
+        -Notes "Sample PPE supply item."
+
+    New-MockAssetRow `
+        -SourceRecordID "SRC-0003" `
+        -ItemName "Tetanus Vaccines" `
+        -Category "Perishable Product" `
+        -Model "Cold storage, exp. 2025" `
+        -SerialNumber "PER-001" `
+        -Location "Coastal Staging Area (Dana Point) - Cold Storage Unit 1" `
+        -Status "Cold Storage" `
+        -Notes "Sample perishable medical item."
+
+    New-MockAssetRow `
+        -SourceRecordID "SRC-0004" `
+        -ItemName "Insulin Pens" `
+        -Category "Perishable Product" `
+        -Model "Cold storage, exp. 2025" `
+        -SerialNumber "PER-002" `
+        -Location "Central Supply Depot (Garden Grove) - Cold Storage Unit 1" `
+        -Status "Cold Storage" `
+        -Notes "Sample perishable medical item."
+
+    New-MockAssetRow `
+        -SourceRecordID "SRC-0005" `
+        -ItemName "Philips HeartStart Defibrillator" `
+        -Category "Equipment" `
+        -SerialNumber "EQP-001" `
+        -Location "South Field Station (Irvine) - Outdoor Staging Pad" `
+        -Status "Available" `
+        -Notes "Tracked equipment sample."
+
+    New-MockAssetRow `
+        -SourceRecordID "SRC-0006" `
+        -ItemName "Zoll Ventilator" `
+        -Category "Equipment" `
+        -SerialNumber "EQP-002" `
+        -Location "East Field Station (Tustin) - Refrigerated Trailer Bay" `
+        -Status "Available" `
+        -Notes "Tracked equipment sample that should create a Jira item." `
+        -CreateJiraItem "Yes"
+
+    New-MockAssetRow `
+        -SourceRecordID "SRC-0007" `
+        -ItemName "Motorola Emergency Radio" `
+        -Category "Equipment" `
+        -Model "APX Series" `
+        -SerialNumber "EQP-003" `
+        -Location "Coastal Staging Area (Dana Point) - Quarantine Storage Room" `
+        -Status "Available" `
+        -Notes "Radio equipment sample."
+
+    New-MockAssetRow `
+        -SourceRecordID "SRC-0008" `
+        -ItemName "2022 Ford E-450 Ambulance" `
+        -Category "Vehicle" `
+        -Model "2022 Ford E-450 Ambulance" `
+        -SerialNumber "VEH-001" `
+        -Location "Coastal Staging Area (Dana Point) - Vehicle Bay" `
+        -Status "Available" `
+        -Notes "Vehicle sample." `
+        -CreateJiraItem "Yes"
+
+    New-MockAssetRow `
+        -SourceRecordID "SRC-0009" `
+        -ItemName "2021 Freightliner Mobile Command" `
+        -Category "Vehicle" `
+        -Model "2021 Freightliner Mobile Command" `
+        -SerialNumber "VEH-002" `
+        -Location "Central Supply Depot (Garden Grove) - Vehicle Bay" `
+        -Status "Available" `
+        -Notes "Mobile command vehicle sample." `
+        -CreateJiraItem "Yes"
+
+    New-MockAssetRow `
+        -SourceRecordID "SRC-0010" `
+        -ItemName "Hand Sanitizer" `
+        -Category "Product" `
+        -Model "Gallon jugs" `
+        -SerialNumber "PROD-003" `
+        -Location "OC HCA Main Distribution Center (Santa Ana) - Hazmat Cage" `
+        -Status "In Stock" `
+        -Notes "Sample consumable supply item."
 )
 
-$rows | Export-Csv -Path $path -NoTypeInformation
-Write-Host "Created: $path"
+$rows | Export-Csv -Path $path -NoTypeInformation -Encoding UTF8
+
+Write-Host "Created mock source file: $path"
+
